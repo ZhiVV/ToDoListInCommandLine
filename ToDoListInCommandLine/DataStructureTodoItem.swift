@@ -8,7 +8,7 @@
 import Foundation
 
 struct TodoItem {
-    let id: Int
+    let id: String
     let text: String
     let importance: Importance
     let deadline: Date
