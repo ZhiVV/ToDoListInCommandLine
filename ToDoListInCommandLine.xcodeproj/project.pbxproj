@@ -29,6 +29,7 @@
 		F512A30429868C8E0035626E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F512A30B29868D940035626E /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
 		F512A30D29868DCD0035626E /* DataStructureTodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStructureTodoItem.swift; sourceTree = "<group>"; };
+		F512A30F2986EE260035626E /* file.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = file.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 				F512A30429868C8E0035626E /* main.swift */,
 				F512A30B29868D940035626E /* FileCache.swift */,
 				F512A30D29868DCD0035626E /* DataStructureTodoItem.swift */,
+				F512A30F2986EE260035626E /* file.json */,
 			);
 			path = ToDoListInCommandLine;
 			sourceTree = "<group>";

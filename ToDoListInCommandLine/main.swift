@@ -16,8 +16,8 @@ while true {
           - see all task, enter - "list"
           - add new task, enter - "add"
           - delete some task, enter - "delete"
-          - load lists from json file, enter - load
-          - save all tasks to json file, enter - save
+          - load tasks from json file, enter - "load"    Attention! Your current tasks be deleted!
+          - save tasks to json file, enter - "save"
           - if you need exit, enter - "exit"
           ----------------------------------------------------
           """)
@@ -27,12 +27,13 @@ while true {
     case "list": listOftask.printTasks()
     case "add": listOftask.newTask()
     case "delete": listOftask.deleteTask()
-    case "load": continue
-    case "save": continue
+    case "load": listOftask.readFromFile()
+    case "save": listOftask.saveToFile(listOftask.cacheTodoItems)
     case "exit": exit(0)
     default: print(">> Incorrect action, try again")
     }
 }
+
 
 
 

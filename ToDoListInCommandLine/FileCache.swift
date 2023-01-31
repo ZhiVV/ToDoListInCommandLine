@@ -23,7 +23,7 @@ class FileCache {
         case "low": importance = .low
         default: importance = .normal
         }
-        
+       
         let temp = TodoItem(id: UUID().uuidString, text: text, importance: importance, deadline: Date.now)
         cacheTodoItems.append(temp)
     }
@@ -46,14 +46,30 @@ class FileCache {
     }
     
     func saveToFile(_ list: [TodoItem]) -> Void {
-        
+        print(">> Functional is under construction")
     }
     
-    func readFromFile() -> [TodoItem] {
-        var temp = [TodoItem]()
+    func readFromFile() -> Void {
+        let pathToFile = "/Users/vlad/Documents/myCode/ToDoListInCommandLine/ToDoListInCommandLine/file.json"       //getDataFromUser(text: ">> Enter file name:")
         
+        let data = try! Data(contentsOf: URL(fileURLWithPath: pathToFile))
         
-        return temp
+        let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+        
+        let tasksArray = dictionary["tasks"] as! [[String: Any]]
+        
+        var returnArray: [TodoItem] = []
+        
+        for tasksDict in tasksArray {
+            returnArray.append(TodoItem(dict: tasksDict))
+        }
+        
+        self.cacheTodoItems = returnArray
+        guard cacheTodoItems.count != 0 else { print(">> Tasks not found in file!")
+            return
+        }
+        
+        print(">> Load \(cacheTodoItems.count) tasks!")
     }
     
     
@@ -64,7 +80,7 @@ class FileCache {
             return
         }
         for task in cacheTodoItems {
-            print("text: \(task.text), importance: \(task.importance), deadline: \(task.deadline)")
+            print("text: \(task.text), importance: \(task.importance), id: \(task.id)")
         }
     }
 }
