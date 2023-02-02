@@ -42,7 +42,8 @@ class FileCache {
             return
         }
             
-        cacheTodoItems.remove(at: index - 1)
+        print(">> You delete a task with id - \(cacheTodoItems.remove(at: index - 1).id)")
+        
     }
     
     func saveToFile(_ list: [TodoItem]) -> Void {
@@ -52,11 +53,32 @@ class FileCache {
     func readFromFile() -> Void {
         let pathToFile = "/Users/vlad/Documents/myCode/ToDoListInCommandLine/ToDoListInCommandLine/file.json"       //getDataFromUser(text: ">> Enter file name:")
         
-        let data = try! Data(contentsOf: URL(fileURLWithPath: pathToFile))
+        var data: Data?
         
-        let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+        do {
+            data = try Data(contentsOf: URL(fileURLWithPath: pathToFile))
+        } catch {
+            print("Error read file from disk. File not found - \(error.localizedDescription)")
+            return
+        }
         
-        let tasksArray = dictionary["tasks"] as! [[String: Any]]
+        guard let data else { return }
+        
+        var dictionary: [String: Any]?
+        
+        do {
+            dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+        } catch {
+            print("Error parsing file - \(error.localizedDescription)")
+            return
+        }
+        
+        guard let dictionary else { return }
+        
+        guard let tasksArray = dictionary["tasks"] as? [[String: Any]] else {
+            print("Error. In json no \"tasks\" in root level")
+            return
+        }
         
         var returnArray: [TodoItem] = []
         
